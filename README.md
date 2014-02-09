@@ -64,3 +64,8 @@ class Post extends Eloquent {
     }
 }
 ```
+
+Warning
+==
+
+This software is an alpha release, that mean that it has no tests, no docs, api may change and world can collapse.
