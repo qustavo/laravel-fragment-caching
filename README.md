@@ -1,8 +1,7 @@
 laravel-fragment-caching
 ========================
 
-Add a Fragment caching support helper
-It try to repoduce 
+Add a Fragment caching support helper.
 
 Installation
 ==
