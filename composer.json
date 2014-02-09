@@ -2,6 +2,7 @@
     "name": "gchaincl/laravel-fragment-caching",
     "description": "Fragment Caching support helper",
     "license": "MIT",
+    "keywords": ["cache", "fragment", "helper", "laravel"],
     "authors": [
         {
             "name": "Gustaf Shin",
