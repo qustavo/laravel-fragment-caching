@@ -1,7 +1,7 @@
 laravel-fragment-caching
 ========================
 
-Add a Fragment caching support helper.
+Add a Fragment caching support helper. [Blog post](http://gustaf.espontanea.io/blog/2014/02/09/laravel-fragment-caching)
 
 Installation
 ==
