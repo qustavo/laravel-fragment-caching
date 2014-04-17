@@ -4,7 +4,7 @@ laravel-fragment-caching
 Add a Fragment caching support helper. [Blog post](http://gustaf.espontanea.io/blog/2014/02/09/laravel-fragment-caching)
 
 Installation
-==
+============
 
 Run: `composer require gchaincl/laravel-fragment-caching:dev-master`
 or
@@ -14,7 +14,7 @@ or
 A new helper called `cache` will be available.
 
 Usage
-==
+=====
 
 `cache($key, Closure)`
 * `key` is the caching key
@@ -34,7 +34,7 @@ In your view:
 </ul>
 ```
 
-First time we load that view, Framwwork will run 3 queries:
+First time we load that view, Framework will run 3 queries:
 ```sql
 select * from "posts"
 select * from "users" where "users"."id" = '5' limit 1
@@ -47,7 +47,7 @@ select * from "posts"
 ```
 
 Tip
---
+---
 
 To update view rendering on model changes, you should expire your fragments:
 
@@ -66,6 +66,6 @@ class Post extends Eloquent {
 ```
 
 Warning
-==
+=======
 
 This software is an alpha release, that mean that it has no tests, no docs, api may change and world can collapse.
