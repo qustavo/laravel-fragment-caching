@@ -33,8 +33,6 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
 
         $blade->extend(function($view, $compiler) {
             $pattern = $compiler->createMatcher('cache');
-            if(!preg_match($pattern, $view, $matched))
-                return $view;
             return preg_replace($pattern, '$1' . $this->cacheTemplate(), $view);
         });
 
