@@ -9,26 +9,27 @@ Installation
 Run: `composer require gchaincl/laravel-fragment-caching:dev-master`
 or
  * add: 	`"require": { "gchaincl/laravel-fragment-caching": "dev-master" }, `to composer.json
- * and run: `composer install`
+ * run: `composer install`
+ * add: The following to your `app/config/app.php`
+```php
+$providers => array(
+  ...
+ 	'Gchaincl\LaravelFragmentCaching\ViewServiceProvider',
+)
+``` 
 
-A new helper called `cache` will be available.
 
 Usage
 =====
-
-`cache($key, Closure)`
-* `key` is the caching key
-* `Closure` should output the text we want to render
-
 
 In your view:
 ```php
 <ul>
 @foreach ($posts as $post)
 
-<?php echo cache("post" . $post->id, function() use ($post) { ?>
+@cache("post" . $post->id)
     <li> {{ link_to_route('post.show', $post->title, $post->id) }} ({{ $post->user->username }})</li>
-<?php }); ?>
+@endcache
 
 @endforeach
 </ul>
