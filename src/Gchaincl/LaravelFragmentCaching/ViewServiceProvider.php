@@ -10,6 +10,20 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
         $this->registerBladeExtensions();
     }
 
+    public function registerEnvironment()
+    {
+        $this->app->bindShared('view', function($app) {
+			$resolver = $app['view.engine.resolver'];
+			$finder = $app['view.finder'];
+			$env = new Environment($resolver, $finder, $app['events']);
+
+			$env->setContainer($app);
+			$env->share('app', $app);
+
+			return $env;
+        });
+    }
+
     protected function registerBladeExtensions()
     {
         $blade = $this->app['view']
@@ -35,32 +49,11 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
     {
         return <<<'EOF'
 <?php
-if ( ! function_exists('cache') )
-{
-    function cache($key, Closure $closure)
-    {
-        $content = Cache::get($key);
-        if ( ! $content ) {
-            ob_start();
-
-            $closure();
-            $content = ob_get_contents();
-            ob_end_clean();
-            Cache::forever($key, $content);
-            Log::debug('writing cache', [$key]);
-        } else {
-            Log::debug('reading cache', [$key]);
-        }
-
-        return $content;
-    }
-}
-
 $__fc_vars = get_defined_vars();
-echo cache($2, function() use($__fc_vars) {
-    foreach($__fc_vars as $k => $v) {
-        $$k = $v;
-    };
+echo $__env->cache($2, function() use($__fc_vars) {
+    extract($__fc_vars);
+
+    // Cached Content goes below this
 
 ?>
 EOF;
