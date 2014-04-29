@@ -13,14 +13,14 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
     public function registerEnvironment()
     {
         $this->app->bindShared('view', function($app) {
-			$resolver = $app['view.engine.resolver'];
-			$finder = $app['view.finder'];
-			$env = new Environment($resolver, $finder, $app['events']);
+            $resolver = $app['view.engine.resolver'];
+            $finder = $app['view.finder'];
+            $env = new Environment($resolver, $finder, $app['events']);
 
-			$env->setContainer($app);
-			$env->share('app', $app);
+            $env->setContainer($app);
+            $env->share('app', $app);
 
-			return $env;
+            return $env;
         });
     }
 
