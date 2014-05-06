@@ -10,11 +10,13 @@
         }
     ],
     "require": {
-    	"illuminate/cache":"4.x"
+        "illuminate/cache":"4.x"
     },
     "autoload": {
-        "files": [
-            "src/helper.php"
-        ]
-    }
+        "psr-0": {
+            "Gchaincl\\LaravelFragmentCaching": "src/"
+        }
+    },
+
+    "minimum-stability": "dev"
 }
