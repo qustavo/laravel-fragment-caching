@@ -7,6 +7,7 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
     public function register()
     {
         parent::register();
+        $this->registerEnvironment();
         $this->registerBladeExtensions();
     }
 
@@ -15,7 +16,7 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
         $this->app->bindShared('view', function($app) {
             $resolver = $app['view.engine.resolver'];
             $finder = $app['view.finder'];
-            $env = new Environment($resolver, $finder, $app['events']);
+            $env = new Factory($resolver, $finder, $app['events']);
 
             $env->setContainer($app);
             $env->share('app', $app);
