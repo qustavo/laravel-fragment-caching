@@ -1,6 +1,6 @@
 <?php namespace Gchaincl\LaravelFragmentCaching;
 
-class Environment extends \Illuminate\View\Environment {
+class Factory extends \Illuminate\View\Factory {
 
     public function cache($key, \Closure $closure)
     {
