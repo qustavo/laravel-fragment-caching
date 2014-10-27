@@ -42,6 +42,15 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
             return preg_replace($pattern, '$1<?php }); ?>', $view);
         });
 
+        $blade->extend(function($view, $compiler) {
+            $pattern = $compiler->createOpenMatcher('cacheif');
+            return preg_replace($pattern, '$1' . $this->cacheIfTemplate(), $view);
+        });
+
+        $blade->extend(function($view, $compiler) {
+            $pattern = $compiler->createPlainMatcher('endcacheif');
+            return preg_replace($pattern, '$1<?php }); ?>', $view);
+        });
     }
 
     private function cacheTemplate()
@@ -49,7 +58,21 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
         return <<<'EOF'
 <?php
 $__fc_vars = get_defined_vars();
-echo $__env->cache($2, $3, function() use($__fc_vars) {
+echo $__env->cache($2, function() use($__fc_vars) {
+    extract($__fc_vars);
+
+    // Cached Content goes below this
+
+?>
+EOF;
+    }
+
+    private function cacheIfTemplate()
+    {
+        return <<<'EOF'
+<?php
+$__fc_vars = get_defined_vars();
+echo $__env->cacheif$2, function() use($__fc_vars) {
     extract($__fc_vars);
 
     // Cached Content goes below this
