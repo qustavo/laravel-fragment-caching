@@ -38,17 +38,12 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
         });
 
         $blade->extend(function($view, $compiler) {
-            $pattern = $compiler->createPlainMatcher('endcache');
-            return preg_replace($pattern, '$1<?php }); ?>', $view);
-        });
-
-        $blade->extend(function($view, $compiler) {
             $pattern = $compiler->createOpenMatcher('cacheif');
             return preg_replace($pattern, '$1' . $this->cacheIfTemplate(), $view);
         });
 
         $blade->extend(function($view, $compiler) {
-            $pattern = $compiler->createPlainMatcher('endcacheif');
+            $pattern = $compiler->createPlainMatcher('endcache(if)?');
             return preg_replace($pattern, '$1<?php }); ?>', $view);
         });
     }
