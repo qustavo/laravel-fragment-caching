@@ -47,6 +47,18 @@ Second time, as fragments are already cached, there will be just one query:
 select * from "posts"
 ```
 
+Conditional caching
+===================
+
+In situations where you don't always want to cache a block you can use `@cacheif($condition, $cacheId)`
+
+```php
+{{-- Only use the cache for guests, admins will always get content rendered from the template --}}
+@cacheif( Auth::guest(), "post" . $post->id)
+    <li> {{ link_to_route('post.show', $post->title, $post->id) }} (@if (Auth::guest()) {{ $post->user->username }} @else {{ $post->user->email }} @endif)</li>
+@endcacheif
+```
+
 Tip
 ---
 

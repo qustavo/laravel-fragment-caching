@@ -2,8 +2,11 @@
 
 class Factory extends \Illuminate\View\Factory {
 
-    public function cache($key, \Closure $closure)
+    public function cacheif($condition, $key, \Closure $closure)
     {
+        if ( ! $condition ) {
+            return $closure();
+        }
         $cache = $this->getContainer()['cache'];
         $log = $this->getContainer()['log'];
 
@@ -22,4 +25,10 @@ class Factory extends \Illuminate\View\Factory {
 
         return $content;
     }
+
+    public function cache($key, \Closure $closure)
+    {
+        return $this->cacheif(true, $key, $closure);
+    }
+
 }

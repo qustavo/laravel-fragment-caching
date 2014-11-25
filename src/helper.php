@@ -1,13 +1,15 @@
 <?php
 
-if ( ! function_exists('cache') )
+if ( ! function_exists('cacheif') )
 {
-    function cache($key, Closure $closure)
+    function cacheif($condition, $key, Closure $closure)
     {
+        if ( ! $condition ) {
+            return $closure();
+	}
         $content = Cache::get($key);
         if ( ! $content ) {
             ob_start();
-            
             $closure();
             $content = ob_get_contents();
             ob_end_clean();
@@ -20,3 +22,13 @@ if ( ! function_exists('cache') )
         return $content;
     }
 }
+
+if ( ! function_exists('cache') )
+{
+    function cache($key, Closure $closure)
+    {
+        return cacheif(true, $key, $closure);
+    }
+}
+
+
