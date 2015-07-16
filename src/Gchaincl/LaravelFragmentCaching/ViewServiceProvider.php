@@ -33,7 +33,7 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
             ->getCompiler();
 
         $blade->extend(function($view, $compiler) {
-            $pattern = $compiler->createMatcher('cache');
+            $pattern = $compiler->createOpenMatcher('cache');
             return preg_replace($pattern, '$1' . $this->cacheTemplate(), $view);
         });
 
@@ -53,7 +53,7 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
         return <<<'EOF'
 <?php
 $__fc_vars = get_defined_vars();
-echo $__env->cache($2, function() use($__fc_vars) {
+echo $__env->cache$2, function() use($__fc_vars) {
     extract($__fc_vars);
 
     // Cached Content goes below this
