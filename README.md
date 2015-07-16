@@ -1,4 +1,6 @@
-[HELP WANTED]
+HELP WANTED
+===========
+
 I'm no longer working on this project, please let me know [here](https://github.com/gchaincl/laravel-fragment-caching/issues/8) if you would like to be commiter on this project.
 
 laravel-fragment-caching
