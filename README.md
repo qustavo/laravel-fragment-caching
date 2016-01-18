@@ -1,4 +1,4 @@
-HELP WANTED
+HELP WANTED [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 ===========
 
 I'm no longer working on this project, please let me know [here](https://github.com/gchaincl/laravel-fragment-caching/issues/8) if you would like to be commiter.
