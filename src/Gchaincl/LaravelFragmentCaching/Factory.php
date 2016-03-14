@@ -2,7 +2,7 @@
 
 class Factory extends \Illuminate\View\Factory {
 
-    public function cacheif($condition, $key, \Closure $closure)
+    public function cacheif($condition, $key, $minutes, \Closure $closure)
     {
         if ( ! $condition ) {
             return $closure();
@@ -17,7 +17,7 @@ class Factory extends \Illuminate\View\Factory {
             $closure();
             $content = ob_get_contents();
             ob_end_clean();
-            $cache->forever($key, $content);
+            $cache->put($key, $content, $minutes);
             $log->debug('writing cache', [$key]);
         } else {
             $log->debug('reading cache', [$key]);
@@ -26,9 +26,9 @@ class Factory extends \Illuminate\View\Factory {
         return $content;
     }
 
-    public function cache($key, \Closure $closure)
+    public function cache($key, $minutes, \Closure $closure)
     {
-        return $this->cacheif(true, $key, $closure);
+        return $this->cacheif(true, $key, $minutes, $closure);
     }
 
 }
